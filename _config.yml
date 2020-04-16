@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+title: 菜鸡问题记录
+subtitle: '想做全栈的小Android'
+description: '啥都感兴趣，啥都想学'
+keywords: "Android, Java, Kotlin, JS, Spring, RXJava"
+author: 萧笑啸
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://chenfuxu920.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
