@@ -99,5 +99,5 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/chenfuxu920/xiaoxiaoxiao.github.io.git
+  repository: git@github.com:chenfuxu920/xiaoxiaoxiao.github.io.git
   branch: gh-pages
