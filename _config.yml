@@ -98,10 +98,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: 1bfd0647d08f3c431e26a42f367b3bce0f2d330d
-  keep-history: true
-  on:
-    branch: master
-  local-dir: public
+  type: git
+  repository: https://github.com/chenfuxu920/xiaoxiaoxiao.github.io.git
+  branch: master
