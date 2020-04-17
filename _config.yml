@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 菜鸡问题记录
+title: 萧笑啸的错题集
 subtitle: '想做全栈的小Android'
 description: '啥都感兴趣，啥都想学'
 keywords: "Android, Java, Kotlin, JS, Spring, RXJava"
@@ -51,45 +51,6 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
-#prism 代码高亮
-prism_plugin:
-  mode: 'preprocess'    # realtime/preprocess
-  theme: 'tomorrow'
-  line_number: false    # default false
-  custom_css:
-#内容搜索
-search:
-  path: search.xml
-  field: post
-#拼音
-permalink_pinyin:
-  enable: true
-  separator: '-' # default: '-'
-#字数统计
-postInfo:
-  date: true
-  update: false
-  wordCount: false # 设置文章字数统计为 true.
-  totalCount: false # 设置站点文章总字数统计为 true.
-  min2read: false # 阅读时长.
-  readCount: false # 阅读次数.
-#emoji支持
-githubEmojis:
-  enable: true
-  className: github-emoji
-  inject: true
-  styles:
-#rss订阅支持
-customEmojis: 
-  feed:
-    type: atom
-    path: atom.xml
-    limit: 20
-    hub:
-    content:
-    content_limit: 140
-    content_limit_delim: ' '
-    order_by: -date 
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -140,3 +101,84 @@ deploy:
   type: git
   repository: git@github.com:chenfuxu920/chenfuxu920.github.io.git
   branch: master
+
+#prism 代码高亮
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'tomorrow'
+  line_number: false    # default false
+  custom_css:
+#内容搜索
+search:
+  path: search.xml
+  field: post
+#拼音
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+#字数统计
+postInfo:
+  date: true
+  update: false
+  wordCount: false # 设置文章字数统计为 true.
+  totalCount: false # 设置站点文章总字数统计为 true.
+  min2read: false # 阅读时长.
+  readCount: false # 阅读次数.
+#emoji支持
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+#rss订阅支持
+customEmojis:
+  feed:
+    type: atom
+    path: atom.xml
+    limit: 20
+    hub:
+    content:
+    content_limit: 140
+    content_limit_delim: ' '
+    order_by: -date
+# 是否激活文章末尾的打赏功能，默认激活（你替换为的你自己的微信、支付宝二维码图片、或者使用网络图片也可以）.
+reward:
+  enable: false
+  title: 你的赏识是我前进的动力
+  wechat: /medias/reward/wechat.png
+  alipay: /medias/reward/alipay.jpg
+# profile in about page, including avatars, career, and personal introductions.
+# 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
+profile:
+  avatar: /medias/avatar.jpg
+  career: Software Engineer
+  introduction: 人生很长，记忆很短，多做些值得回忆的事
+# 在“关于”页面配置"我的项目"信息，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
+myProjects:
+  enable: true
+# 在“关于”页面配置"我的技能"信息，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
+mySkills:
+  enable: true
+  data:
+    Java:
+      background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
+      percent: 85%
+    JavaScript:
+      background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
+      percent: 60%
+    HTML5:
+      background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
+      percent: 30%
+    CSS:
+      background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
+      percent: 30%
+    SQL:
+      background: 'linear-gradient(to right, #4CAF50 0%, #81C784 100%)'
+      percent: 90%
+    程序设计:
+      background: 'linear-gradient(to right, #FFEB3B 0%, #FFF176 100%)'
+      percent: 75%
+# 在“关于”页面配置"我的相册"图片，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
+myGallery:
+  enable: true
+
