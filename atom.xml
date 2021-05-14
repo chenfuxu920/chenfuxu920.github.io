@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenfuxu920.github.io/"/>
-  <updated>2021-05-14T08:37:08.839Z</updated>
+  <updated>2021-05-14T09:05:58.252Z</updated>
   <id>http://chenfuxu920.github.io/</id>
   
   <author>
@@ -17,11 +17,115 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vue项目配置WSS（Websocket SSL）双向认证</title>
+    <link href="http://chenfuxu920.github.io/2021/05/14/vue-xiang-mu-pei-zhi-wss-websocket-ssl-shuang-xiang-ren-zheng/"/>
+    <id>http://chenfuxu920.github.io/2021/05/14/vue-xiang-mu-pei-zhi-wss-websocket-ssl-shuang-xiang-ren-zheng/</id>
+    <published>2021-05-14T09:00:59.000Z</published>
+    <updated>2021-05-14T09:05:58.252Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="本地运行设置"><a href="#本地运行设置" class="headerlink" title="本地运行设置"></a>本地运行设置</h3><p>修改<code>webpack</code>配置</p><pre class=" language-js"><code class="language-js"><span class="token operator">...</span><span class="token operator">...</span>devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>    proxy<span class="token punctuation">:</span><span class="token punctuation">{</span>          <span class="token string">'/socket'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>            target<span class="token punctuation">:</span> <span class="token string">"wss://xxx.xxx.xxx.xxx:xxxx"</span><span class="token punctuation">,</span>            changeOrigin<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>            agent<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">https<span class="token punctuation">.</span>Agent</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">,</span>            secure<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>            ws<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>            pathRewrite<span class="token punctuation">:</span><span class="token punctuation">{</span>              <span class="token string">'^/socket'</span><span class="token punctuation">:</span><span class="token string">''</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span><span class="token punctuation">,</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre><h3 id="Nginx服务器设置"><a href="#Nginx服务器设置" class="headerlink" title="Nginx服务器设置"></a>Nginx服务器设置</h3><p>修改<code>nginx.cnf</code></p><pre class=" language-cnf"><code class="language-cnf">server {......  location / {      try_files $uri $uri/ index.html;  }  location /socket/ {    proxy_pass https://xxx.xxx.xxx.xxx:xxxx/;    proxy_ssl_trusted_certificate /web_gantt/ca/ca.pem;    proxy_ssl_certificate     /web_gantt/ca/cert.pem;    proxy_ssl_certificate_key /web_gantt/ca/key.pem;    proxy_set_header X-real-ip $remote_addr;    proxy_set_header X-Forwarded-For $remote_addr;    proxy_set_header Upgrade $http_upgrade; #wss    proxy_set_header Connection "upgrade"; #wss  }}</code></pre><h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><pre class=" language-js"><code class="language-js"><span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token string">"wss://"</span><span class="token operator">+</span>location<span class="token punctuation">.</span>host<span class="token operator">+</span><span class="token string">"/socket"</span><span class="token punctuation">)</span></code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;本地运行设置&quot;&gt;&lt;a href=&quot;#本地运行设置&quot; class=&quot;headerlink&quot; title=&quot;本地运行设置&quot;&gt;&lt;/a&gt;本地运行设置&lt;/h3&gt;&lt;p&gt;修改&lt;code&gt;webpack&lt;/code&gt;配置&lt;/p&gt;
+&lt;pre class=&quot; language-js&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://chenfuxu920.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="Https" scheme="http://chenfuxu920.github.io/tags/Https/"/>
+    
+      <category term="TLS" scheme="http://chenfuxu920.github.io/tags/TLS/"/>
+    
+      <category term="JavaScript" scheme="http://chenfuxu920.github.io/tags/JavaScript/"/>
+    
+      <category term="Vue" scheme="http://chenfuxu920.github.io/tags/Vue/"/>
+    
+      <category term="SSL" scheme="http://chenfuxu920.github.io/tags/SSL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue项目配置Https双向认证</title>
+    <link href="http://chenfuxu920.github.io/2021/05/14/vue-xiang-mu-pei-zhi-https-shuang-xiang-ren-zheng/"/>
+    <id>http://chenfuxu920.github.io/2021/05/14/vue-xiang-mu-pei-zhi-https-shuang-xiang-ren-zheng/</id>
+    <published>2021-05-14T08:54:08.000Z</published>
+    <updated>2021-05-14T09:01:28.857Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="访问双向认证的Https接口"><a href="#访问双向认证的Https接口" class="headerlink" title="访问双向认证的Https接口"></a>访问双向认证的Https接口</h2><h3 id="本地运行设置"><a href="#本地运行设置" class="headerlink" title="本地运行设置"></a>本地运行设置</h3><p>修改<code>webpack</code>配置</p><pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>      <span class="token comment" spellcheck="true">//客户端密钥</span>    key<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/key.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">//客户端公钥</span>    cert<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/cert.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">//颁证机构证书</span>    ca<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/ca.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment" spellcheck="true">//删除后会验证域名  </span>    checkServerIdentity<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>      requestCert<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>  <span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">...</span>devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>    proxy<span class="token punctuation">:</span><span class="token punctuation">{</span>          <span class="token string">'api'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>              target<span class="token punctuation">:</span> <span class="token string">"https://xxx.xxx.xxx.xxx:xxxx"</span><span class="token punctuation">,</span>              changeOrigin<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>            <span class="token comment" spellcheck="true">//使用证书访问接口</span>            agent<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">https<span class="token punctuation">.</span>Agent</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">,</span>            secure<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>              pathRewrite<span class="token punctuation">:</span><span class="token punctuation">{</span>                <span class="token string">'^/api'</span><span class="token punctuation">:</span><span class="token string">''</span>          <span class="token punctuation">}</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre><h3 id="Nginx服务器设置"><a href="#Nginx服务器设置" class="headerlink" title="Nginx服务器设置"></a>Nginx服务器设置</h3><p>修改<code>nginx.cnf</code></p><pre class=" language-cnf"><code class="language-cnf">server {......  location / {      try_files $uri $uri/ index.html;  }  location /api {    proxy_pass https://8.134.73.119:8088/;    proxy_ssl_trusted_certificate /web_gantt/ca/ca.pem;    proxy_ssl_certificate     /web_gantt/ca/cert.pem;    proxy_ssl_certificate_key /web_gantt/ca/key.pem;  }}</code></pre><h2 id="认证浏览器证书"><a href="#认证浏览器证书" class="headerlink" title="认证浏览器证书"></a>认证浏览器证书</h2><h3 id="本地运行配置"><a href="#本地运行配置" class="headerlink" title="本地运行配置"></a>本地运行配置</h3><p>修改<code>webpack</code>配置</p><pre class=" language-js"><code class="language-js">    <span class="token comment" spellcheck="true">/*---------添加https配置---------*/</span>    https<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>    key<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/server-key.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    cert<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/server-cert.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    ca<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'../ca/ca.pem'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    requestCert<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">/*---------添加https配置---------*/</span></code></pre><h3 id="Nginx服务器设置-1"><a href="#Nginx服务器设置-1" class="headerlink" title="Nginx服务器设置"></a>Nginx服务器设置</h3><p>修改<code>nginx.cnf</code></p><pre class=" language-cnf"><code class="language-cnf">......  ssl                  on;  ssl_certificate      /web_gantt/ca/server-cert.pem;  #server证书公钥  ssl_certificate_key  /web_gantt/ca/server-key.pem;  #server私钥  ssl_client_certificate /web_gantt/ca/ca.pem;  #根级证书公钥，用于验证各个二级client  ssl_session_timeout 5m;  ssl_protocols SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置  ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; #按照这个套件配置  ssl_prefer_server_ciphers on;  ssl_verify_client on;  #开启客户端证书验证......</code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;访问双向认证的Https接口&quot;&gt;&lt;a href=&quot;#访问双向认证的Https接口&quot; class=&quot;headerlink&quot; title=&quot;访问双向认证的Https接口&quot;&gt;&lt;/a&gt;访问双向认证的Https接口&lt;/h2&gt;&lt;h3 id=&quot;本地运行设置&quot;&gt;&lt;a href=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://chenfuxu920.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="Https" scheme="http://chenfuxu920.github.io/tags/Https/"/>
+    
+      <category term="TLS" scheme="http://chenfuxu920.github.io/tags/TLS/"/>
+    
+      <category term="JavaScript" scheme="http://chenfuxu920.github.io/tags/JavaScript/"/>
+    
+      <category term="Vue" scheme="http://chenfuxu920.github.io/tags/Vue/"/>
+    
+      <category term="SSL" scheme="http://chenfuxu920.github.io/tags/SSL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS搭建Conturn服务（stun、turn服务器）</title>
+    <link href="http://chenfuxu920.github.io/2021/05/14/centos-da-jian-conturn-fu-wu-stun-turn-fu-wu-qi/"/>
+    <id>http://chenfuxu920.github.io/2021/05/14/centos-da-jian-conturn-fu-wu-stun-turn-fu-wu-qi/</id>
+    <published>2021-05-14T08:45:49.000Z</published>
+    <updated>2021-05-14T08:52:15.568Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol><li>使用<code>yum</code>安装<code>coturn</code><pre class=" language-bash"><code class="language-bash">yum <span class="token function">install</span> coturn</code></pre></li><li>添加用户<pre class=" language-bash"><code class="language-bash">turnadmin -a -u username -r xxx.xxx.xxx.xxx -p password</code></pre></li><li>生成签名证书<pre class=" language-bash"><code class="language-bash">openssl req -x509 -newkey rsa:2048 -keyout /etc/turn_server_pkey.pem -out /etc/turn_server_cert.pem -days 99999 -nodes</code></pre></li><li>下载<a href="https://github.com/coturn/coturn/blob/master/examples/etc/turnserver.conf" target="_blank" rel="noopener">配置文件</a>，并复制到<code>/usr/local/etc/turnserver.conf</code></li><li>修改<code>/usr/local/etc/turnserver.conf</code><pre class=" language-bash"><code class="language-bash">listening-port<span class="token operator">=</span>3478tls-listening-port<span class="token operator">=</span>5349relay-device<span class="token operator">=</span>eth0external-ip<span class="token operator">=</span>xxx.xxx.xxx.xxx <span class="token comment" spellcheck="true">#你服务器的公网ip</span>relay-threads<span class="token operator">=</span>50 lt-cred-mechuser<span class="token operator">=</span>username:password  <span class="token comment" spellcheck="true">#之前配置的用户名和密码</span>userdb<span class="token operator">=</span>/usr/local/var/db/turndb  <span class="token comment" spellcheck="true">#存储用户名和免密的sqlite文件</span>cert<span class="token operator">=</span>/etc/turn_server_cert.pempkey<span class="token operator">=</span>/etc/turn_server_pkey.pemlog-file<span class="token operator">=</span>/var/log/turnserver.logpidfile<span class="token operator">=</span><span class="token string">"/var/run/turnserver.pid"</span>no-clicli-password<span class="token operator">=</span>password</code></pre></li><li>启动<code>coturn</code><pre class=" language-bash"><code class="language-bash">turnserver -v -r xxx.xxx.xxx.xxx:3478 -a -o -c /usr/local/etc/turnserver.conf</code></pre><h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2></li><li>查找对应进程<pre class=" language-bash"><code class="language-bash"><span class="token function">ps</span> -ef<span class="token operator">|</span><span class="token function">grep</span> turnserver</code></pre></li><li>关闭对应进程<pre class=" language-bash"><code class="language-bash"><span class="token function">kill</span> -9 xxxx</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2></li><li>服务器上查看服务端口<pre class=" language-bash"><code class="language-bash"><span class="token function">netstat</span> -apn<span class="token operator">|</span><span class="token function">grep</span> 3478<span class="token function">netstat</span> -apn<span class="token operator">|</span><span class="token function">grep</span> 5349</code></pre></li><li>本地电脑下载<a href="http://www.stunprotocol.org/" target="_blank" rel="noopener">测试软件</a></li><li>在对应目录执行测试命令<pre class=" language-bash"><code class="language-bash">./stunclient.exe xxx.xxx.xxx.xxx</code></pre></li><li>成功结果<pre class=" language-bash"><code class="language-bash">Binding test: successLocal address: 172.20.12.166:62671Mapped address: 113.247.230.228:45129</code></pre></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;使用&lt;code&gt;yum&lt;/code&gt;安装&lt;code&gt;coturn&lt;/code&gt;&lt;pre class=&quot; language-bas
+      
+    
+    </summary>
+    
+    
+      <category term="Server" scheme="http://chenfuxu920.github.io/categories/Server/"/>
+    
+    
+      <category term="Server" scheme="http://chenfuxu920.github.io/tags/Server/"/>
+    
+      <category term="CentOS" scheme="http://chenfuxu920.github.io/tags/CentOS/"/>
+    
+      <category term="STUN" scheme="http://chenfuxu920.github.io/tags/STUN/"/>
+    
+      <category term="TURN" scheme="http://chenfuxu920.github.io/tags/TURN/"/>
+    
+      <category term="WebRTC" scheme="http://chenfuxu920.github.io/tags/WebRTC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android MediaPlayer访问Https流</title>
     <link href="http://chenfuxu920.github.io/2021/05/14/android-mediaplayer-fang-wen-https-liu/"/>
     <id>http://chenfuxu920.github.io/2021/05/14/android-mediaplayer-fang-wen-https-liu/</id>
     <published>2021-05-14T08:15:17.000Z</published>
-    <updated>2021-05-14T08:37:08.839Z</updated>
+    <updated>2021-05-14T09:01:53.931Z</updated>
     
     <content type="html"><![CDATA[<p>现有项目出于安全考虑，使用了<code>Https双向认证</code>，这就要求客户端访问服务端资源时必须提供客户端证书，在使用<code>OkHttpClient</code>时，我们可以通过<code>OkHttpClient</code>配置项来设置<code>SSLSocketFactory</code>、<code>X509TrustManager</code>、<code>HostnameVerifier</code>，而<code>MediaPlayer</code>并没有提供配置网络请求的方法，只能通过<code>setDataSource(Uri)</code>来提供资源地址，但其实<code>MediaPlayer</code>内部也是通过<code>HttpsURLConnection</code>进行的网络访问，我们无法单独配置这一次网络请求，但我们可以配置<code>HttpsURLConnection</code>的默认请求。</p><p>通过<code>HttpsURLConnection.setDefaultSSLSocketFactory</code>和<code>HttpsURLConnection.setDefaultHostnameVerifier</code>来指定默认Https证书和域名认证即可</p><pre class=" language-java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>    HttpsURLConnection<span class="token punctuation">.</span><span class="token function">setDefaultSSLSocketFactory</span><span class="token punctuation">(</span>        SSLHelper<span class="token punctuation">.</span><span class="token function">getSSLCertifcation</span><span class="token punctuation">(</span>MyApplication<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    HttpsURLConnection<span class="token punctuation">.</span><span class="token function">setDefaultHostnameVerifier</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">UnSafeHostnameVerifier</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
     
@@ -43,6 +147,8 @@
       <category term="Https" scheme="http://chenfuxu920.github.io/tags/Https/"/>
     
       <category term="TLS" scheme="http://chenfuxu920.github.io/tags/TLS/"/>
+    
+      <category term="SSL" scheme="http://chenfuxu920.github.io/tags/SSL/"/>
     
   </entry>
   
