@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Android MediaPlayer访问Https流</title>
+      <link href="/2021/05/14/android-mediaplayer-fang-wen-https-liu/"/>
+      <url>/2021/05/14/android-mediaplayer-fang-wen-https-liu/</url>
+      
+        <content type="html"><![CDATA[<p>现有项目出于安全考虑，使用了<code>Https双向认证</code>，这就要求客户端访问服务端资源时必须提供客户端证书，在使用<code>OkHttpClient</code>时，我们可以通过<code>OkHttpClient</code>配置项来设置<code>SSLSocketFactory</code>、<code>X509TrustManager</code>、<code>HostnameVerifier</code>，而<code>MediaPlayer</code>并没有提供配置网络请求的方法，只能通过<code>setDataSource(Uri)</code>来提供资源地址，但其实<code>MediaPlayer</code>内部也是通过<code>HttpsURLConnection</code>进行的网络访问，我们无法单独配置这一次网络请求，但我们可以配置<code>HttpsURLConnection</code>的默认请求。</p><p>通过<code>HttpsURLConnection.setDefaultSSLSocketFactory</code>和<code>HttpsURLConnection.setDefaultHostnameVerifier</code>来指定默认Https证书和域名认证即可</p><pre class=" language-java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>    HttpsURLConnection<span class="token punctuation">.</span><span class="token function">setDefaultSSLSocketFactory</span><span class="token punctuation">(</span>        SSLHelper<span class="token punctuation">.</span><span class="token function">getSSLCertifcation</span><span class="token punctuation">(</span>MyApplication<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    HttpsURLConnection<span class="token punctuation">.</span><span class="token function">setDefaultHostnameVerifier</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">UnSafeHostnameVerifier</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> Https </tag>
+            
+            <tag> TLS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>IDEA/Android Studio 窗口不显示问题</title>
+      <link href="/2020/06/08/idea-android-studio-chuang-kou-bu-xian-shi-wen-ti/"/>
+      <url>/2020/06/08/idea-android-studio-chuang-kou-bu-xian-shi-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<p>今天在双屏使用<code>IDEA</code>时，拖动<code>IDEA</code>到另一块屏幕上的时候，窗口不显示了，网上搜这个问题时，说的方法大多为修改<code>workspace.xml</code>中的<code>ProjectFrameBounds</code>参数，但是我在项目的<code>.idea</code>目录下的<code>workspace.xml</code>中并没有发现<code>ProjectFrameBounds</code>参数，这其实是因为新版的<code>IDEA</code>配置管理是分散在不同的目录的，具体操作如下</p><ol><li>打开<code>idea.config.path</code>配置的文件夹，默认为C盘User目录下，<code>.IntelliJIdea</code>目录</li><li>打开<code>options\window.state.xml</code>，找到<code>"WindowManager"</code>，修改<code>frame</code>元素中的x，y，建议改为0</li><li>打开<code>ptions\recentProjects.xml</code>,找到你的项目，修改<code>frame</code>元素中的x，y，并且记下<code>projectWorkspaceId</code></li><li>打开<code>workspace</code>目录，找到<code>${projectWorkspaceId}.xml</code>，也就是前面<code>projectWorkspaceId</code>对应的文件，修改<code>ProjectFrameBounds</code>元素中的x，y</li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> IDEA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android Studio </tag>
+            
+            <tag> IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CentOS8 Docker Compose容器互联出现java.net.NoRouteToHostException: Host is unreachable</title>
+      <link href="/2020/02/19/centos8-docker-compose-rong-qi-hu-lian-chu-xian-java-net-noroutetohostexception-host-is-unreachable/"/>
+      <url>/2020/02/19/centos8-docker-compose-rong-qi-hu-lian-chu-xian-java-net-noroutetohostexception-host-is-unreachable/</url>
+      
+        <content type="html"><![CDATA[<p>今天在CentOS8下使用Docker Compose部署Spring Cloud项目时出现Host is unreachable问题，在网上找寻半天，终于找到一个场景类似的问题（<a href="https://www.cnblogs.com/jojo-feed/p/10669296.html" target="_blank" rel="noopener">https://www.cnblogs.com/jojo-feed/p/10669296.html</a>）。</p><p>这个问题有几种出现的场景：</p><blockquote><p>1.因为CentOS7以后使用了firewall，而不是iptables，docker默认网络配置是桥接，会建立一个docker0网桥，并会为docker0创建iptables的规则，而不会为firewall创建规则，但是这种情况只适用于直接使用docker，而不是使用docker compose的情况（大部分人都是这个场景，网上答案也大多数是这个场景）<br>2.使用docker compose ，使用docker compose的时候，每个docker-compose项目，默认都会创建一个网桥，这时候必须单独为该网桥设置firewall规则。</p></blockquote><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Server </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Server </tag>
+            
+            <tag> CentOS </tag>
+            
+            <tag> Docker-Compose </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>频繁createBitmap导致的OOM问题记录</title>
+      <link href="/2018/05/16/pin-fan-createbitmap-dao-zhi-de-oom-wen-ti-ji-lu/"/>
+      <url>/2018/05/16/pin-fan-createbitmap-dao-zhi-de-oom-wen-ti-ji-lu/</url>
+      
+        <content type="html"><![CDATA[<p>最近在做一个相机有关的应用，相机输出的一般来说都是需要旋转才能变为我们看来正向的图像的，这是因为相机传感器的坐标体系和屏幕不一致造成的，具体的不展开说了。但是图像输出导致的一系列问题值得记录一番。</p><p>首先是图像预览输出很慢很卡，这时候就要注意一下，<code>ImageReader</code>的输出格式不要使用<code>ImageFormat.JPEG</code>，可以使用<code>ImageFormat.YUV_420_888</code>，我猜测原因是<code>JPEG</code>格式输出的话，相机还得为我们做一次转码，在低性能手机上很容易导致卡顿，如果改了格式还卡的话，考虑一下降低图像输出的分辨率吧。至于<code>YUV</code>转<code>Bitmap</code>的话，可以网上找找<code>C</code>的库，性能比直接输出<code>JPEG</code>转<code>Bitmap</code>更高。</p><p>接下来就是图像的方向和屏幕不一致了，网上搜索旋转<code>Bitmap</code>，基本上都是说使用</p><blockquote><p>Bitmap.createBitmap(Bitmap source, int x, int y, int width, int height, Matrix m, boolean filter)</p></blockquote><p>来创建一个新的<code>Bitmap</code>，然后将原<code>Bitmap</code>释放掉，这时候坑就来了，在平时这样使用是没事的，但是在相机预览输出的时候就有问题了，因为相机预览输出速度很快，这种情况下<code>Bitmap</code>是来不及释放掉的，会慢慢的内存泄漏，直到最后出现内存溢出。而且<code>Bitmap</code>的创建时非常消耗内存的，这样频繁创建<code>Bitmap</code>，内存的消耗是飞速的，这时候我们可以选用另外一种方式，网上很少有人提到的方法来旋转<code>Bitmap</code>，这个方法就是使用<code>Canvas</code>。</p><p>我们知道，<code>Canvas</code>创建的时候可以传入<code>Bitmap</code>，这时候<code>Canvas</code>上的所有绘制都会直接绘制在<code>Bitmap</code>上，而且<code>Canvas</code>也有<code>drawBitmap</code>方法，可以用其他<code>Bitmap</code>做画笔，更关键的是，<code>drawBitmap</code>的重载方法里有一个是可以传入<code>Matrix</code>的，这时候解决方法就出来了，我们可以创建一个全局复用的<code>Bitmap</code>，注意大小使用旋转后的大小，然后使用它来创建<code>Canvas</code>，之后所有<code>bitmap</code>旋转都不用再生成新的<code>bitmap</code>，只要使用<code>canvas.drawBitmap</code>在全局<code>Bitmap</code>上画就行。不过事情还没完。</p><p>通过<code>Bitmap</code>创建的<code>Canvas</code>的画布大小就是<code>Bitmap</code>的大小，我们旋转<code>bitmap</code>的时候要注意，<code>Matrix</code>旋转时画笔<code>Bitmap</code>的位置是会发生变化的，最后画出来能输出到<code>Bitmap</code>上的可能只有小部分，甚至完全没有画在<code>Bitmap</code>上。这时候我们就需要在<code>Matrix</code>里面添加位移操作，来保持画笔输出位置和画布一致了，具体的位移距离就得自己算了，因为线代我已经忘干净了，所以我的做法是，拿两张纸，自己旋转完看位置……</p><p>到此，相机图像输出导致的所有问题都解决了，写出来就这么几步，但是摸索的时候也卡了我老半天，因为网上没有搜到相关的问题记录，所以记录下来以免忘记。</p><p><strong>——在<code>YUV</code>转<code>Bitmap</code>可以使用<code>libyuv</code>库，同时旋转操作也可以通过该库完成，如果可以，最好不要使用Java做旋转</strong></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RxJava2-doOn系列方法未调用问题记录</title>
+      <link href="/2018/01/04/rxjava2-doon-xi-lie-fang-fa-wei-diao-yong-wen-ti-ji-lu/"/>
+      <url>/2018/01/04/rxjava2-doon-xi-lie-fang-fa-wei-diao-yong-wen-ti-ji-lu/</url>
+      
+        <content type="html"><![CDATA[<p>现象：</p><blockquote><p>在map，flatmap中手动抛出异常，Subscriber的onError()方法被调用，但是doOnError/doOnTerminate等操作符未被调用，仅有doOnCancel被调用。</p></blockquote><p>尝试解决过程：</p><blockquote><p>修改一下，将doOn系列方法置于线程切换方法之前，此时，doOnTerminate操作符生效，但是doOnError仍然无效。<br>再次修改，将map，flatmap操作符置于doOn系列方法之前，此时不管doOn系列方法是否在线程切换方法之前，doOn系列方法均正常生效。另外有一点，未抛出异常时，不管方法顺序如何，doOn系列方法均正常生效</p></blockquote><p>结论：</p><blockquote><p>doOn系列方法应该在最接近订阅方法的地方添加，不要在doOn系列方法之后再执行变换等数据变化操作，否则会导致doOn系列方法无法被正确调用。</p></blockquote><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> RxJava </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用系统裁剪时FileProvider权限问题</title>
+      <link href="/2017/08/16/shi-yong-xi-tong-cai-jian-shi-fileprovider-quan-xian-wen-ti/"/>
+      <url>/2017/08/16/shi-yong-xi-tong-cai-jian-shi-fileprovider-quan-xian-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h3 id="FileProvider使用"><a href="#FileProvider使用" class="headerlink" title="FileProvider使用"></a>FileProvider使用</h3><p>当使用FileProvider生成uri时，使用uri的intent应添加</p><pre class=" language-java"><code class="language-java">intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_READ_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_WRITE_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>来授予权限。</p><h3 id="使用系统裁剪时遇到的坑"><a href="#使用系统裁剪时遇到的坑" class="headerlink" title="使用系统裁剪时遇到的坑"></a>使用系统裁剪时遇到的坑</h3><pre class=" language-java"><code class="language-java">Intent intent <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Intent</span><span class="token punctuation">(</span><span class="token string">"com.android.camera.action.CROP"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_READ_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_WRITE_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">setDataAndType</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> <span class="token string">"image/*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">"crop"</span><span class="token punctuation">,</span> <span class="token string">"true"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">"return-data"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>MediaStore<span class="token punctuation">.</span>EXTRA_OUTPUT<span class="token punctuation">,</span> tempUri<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">startActivityForResult</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span>REQUEST_CODE_CUT_PHOTO<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>当<code>intent.setDataAndType(uri,"image/*");</code>中的 uri 和 <code>intent.putExtra(MediaStore.EXTRA_OUTPUT,tempUri);</code> 中 tempUri 一致时，使用<code>intent.addFlags</code>即可，但当 uri 和 tempUri 不一致时则会报错</p><pre class=" language-java"><code class="language-java">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>SecurityException<span class="token operator">:</span> Permission Denial<span class="token operator">:</span> opening provider android<span class="token punctuation">.</span>support<span class="token punctuation">.</span>v4<span class="token punctuation">.</span>content<span class="token punctuation">.</span>FileProvider from ProcessRecord，</code></pre><p>这是因为<code>intent.addFlags</code>只是为intent访问uri添加了权限，没有为访问tempUri添加权限，所以保存裁剪图时会报错，这时必须使用如下代码来为intent添加tempUri权限</p><pre class=" language-java"><code class="language-java">List resInfoList <span class="token operator">=</span> <span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getPackageManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">queryIntentActivities</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span>PackageManager<span class="token punctuation">.</span>MATCH_DEFAULT_ONLY<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">for</span><span class="token punctuation">(</span>ResolveInfo resolveInfo <span class="token operator">:</span> resInfoList<span class="token punctuation">)</span> <span class="token punctuation">{</span>    String packageName <span class="token operator">=</span> resolveInfo<span class="token punctuation">.</span>activityInfo<span class="token punctuation">.</span>packageName<span class="token punctuation">;</span>    <span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">grantUriPermission</span><span class="token punctuation">(</span>packageName<span class="token punctuation">,</span>tempUri<span class="token punctuation">,</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_WRITE_URI_PERMISSION<span class="token operator">|</span>     Intent<span class="token punctuation">.</span>FLAG_GRANT_READ_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Android </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> FileProvider </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
