@@ -2,6 +2,7 @@
 title: 使用系统裁剪时FileProvider权限问题
 date: 2017.08.16 12:35:32
 tags: [Android, FileProvider]
+categories: Android
 toc: true
 ---
 

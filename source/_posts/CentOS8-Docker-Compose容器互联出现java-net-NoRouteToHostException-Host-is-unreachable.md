@@ -3,7 +3,8 @@ title: >-
   CentOS8 Docker Compose容器互联出现java.net.NoRouteToHostException: Host is unreachable
 toc: true
 date: 2020.02.19 19:17:52
-tags:
+tags: [Server, CentOS, Docker-Compose]
+categories: Server
 ---
 今天在CentOS8下使用Docker Compose部署Spring Cloud项目时出现Host is unreachable问题，在网上找寻半天，终于找到一个场景类似的问题（[https://www.cnblogs.com/jojo-feed/p/10669296.html](https://www.cnblogs.com/jojo-feed/p/10669296.html)）。
 

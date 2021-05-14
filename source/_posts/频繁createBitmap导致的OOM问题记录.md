@@ -2,6 +2,7 @@
 title: 频繁createBitmap导致的OOM问题记录
 date: 2018.05.16 17:55:11
 tags: Android
+categories: Android
 toc: true
 ---
 

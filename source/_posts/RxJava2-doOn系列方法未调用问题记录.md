@@ -2,6 +2,7 @@
 title: RxJava2-doOn系列方法未调用问题记录
 date: 2018.01.04 14:50:52
 tags: [Android, RxJava]
+categories: Android
 toc: true
 ---
 现象：
